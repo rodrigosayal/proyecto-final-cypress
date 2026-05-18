@@ -6,9 +6,9 @@ Este repositorio contiene el **Proyecto Final de Automatización con Cypress** r
 
 ## 👥 Integrantes del Grupo
 * **Rodrigo Sayal**
-* *Ignacio Martin*
-* *César Taddey*
-* *Franco Meza*
+* **Ignacio Martin**
+* **César Taddey**
+* **Franco Meza**
 
 ---
 
@@ -45,15 +45,15 @@ Cada integrante del grupo tiene la responsabilidad de documentar y automatizar *
 * **Caso 4:** `[Título del Caso FE]` | **Ignacio Martin**
 * **Caso 5:** API | `[Título del Caso API Exitoso]` | **Ignacio Martin**
 * **Caso 6:** API | `[Título del Caso API Error]` | **Ignacio Martin**
-* **Caso 7:** `[Título del Caso FE]` | *Rodrigo Sayal*
-* **Caso 8:** API | `[Título del Caso API Exitoso]` | *Rodrgigo Sayal*
-* **Caso 9:** API | `[Título del Caso API Error]` | *Rodrigo Sayal*
-* **Caso 10:** `[Título del Caso FE]` | *Cësar Taddey*
-* **Caso 11:** API | `[Título del Caso API Exitoso]` | *César Taddey*
-* **Caso 12:** API | `[Título del Caso API Error]` | *César Taddey*
-* **Caso 13:** `[Título del Caso FE]` | *Franco Meza*
-* **Caso 14:** API | `[Título del Caso API Exitoso]` | *Franco Meza*
-* **Caso 15:** API | `[Título del Caso API Error]` | *Franco Meza*
+* **Caso 7:** `[Título del Caso FE]` | **Rodrigo Sayal**
+* **Caso 8:** API | `[Título del Caso API Exitoso]` | **Rodrgigo Sayal**
+* **Caso 9:** API | `[Título del Caso API Error]` | **Rodrigo Sayal**
+* **Caso 10:** `[Título del Caso FE]` | **Cësar Taddey**
+* **Caso 11:** API | `[Título del Caso API Exitoso]` | **César Taddey**
+* **Caso 12:** API | `[Título del Caso API Error]` | **César Taddey**
+* **Caso 13:** `[Título del Caso FE]` | **Franco Meza**
+* **Caso 14:** API | `[Título del Caso API Exitoso]` | **Franco Meza**
+* **Caso 15:** API | `[Título del Caso API Error]` | **Franco Meza**
 
 ---
 
