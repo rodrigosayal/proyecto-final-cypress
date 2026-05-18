@@ -46,9 +46,9 @@ Cada integrante del grupo tiene la responsabilidad de documentar y automatizar *
 * **Caso 5:** API | `[Título del Caso API Exitoso]` | **Ignacio Martin**
 * **Caso 6:** API | `[Título del Caso API Error]` | **Ignacio Martin**
 * **Caso 7:** `[Título del Caso FE]` | **Rodrigo Sayal**
-* **Caso 8:** API | `[Título del Caso API Exitoso]` | **Rodrgigo Sayal**
+* **Caso 8:** API | `[Título del Caso API Exitoso]` | **Rodrigo Sayal**
 * **Caso 9:** API | `[Título del Caso API Error]` | **Rodrigo Sayal**
-* **Caso 10:** `[Título del Caso FE]` | **Cësar Taddey**
+* **Caso 10:** `[Título del Caso FE]` | **César Taddey**
 * **Caso 11:** API | `[Título del Caso API Exitoso]` | **César Taddey**
 * **Caso 12:** API | `[Título del Caso API Error]` | **César Taddey**
 * **Caso 13:** `[Título del Caso FE]` | **Franco Meza**
