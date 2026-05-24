@@ -21,6 +21,7 @@ describe('Casos de prueba de FRONT', () => {
 
     //Accion paso 3:
     cy.get('.mdc-icon-button.mat-mdc-icon-button.mat-mdc-button-base.mat-unthemed').contains('shopping_cart').click()
+    
 
 
 
