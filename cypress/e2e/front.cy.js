@@ -1,6 +1,10 @@
 describe('Casos de prueba de FRONT', () => {
 
-  // Precondicion
+  
+
+  it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
+
+    // Precondicion
     cy.request({
       method: 'DELETE',
       url: 'https://app.bookdbqa.online/api/shoppingcart/1062',
@@ -13,7 +17,7 @@ describe('Casos de prueba de FRONT', () => {
   }).then((response) => {
       expect(response.status).to.eq(200)})
 
-  it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
+      
     cy.visit('https://app.bookdbqa.online/login')
     cy.get('input[formcontrolname="username"]').type('UTest')
     cy.get('input[formcontrolname="password"]').type('Utest123')
