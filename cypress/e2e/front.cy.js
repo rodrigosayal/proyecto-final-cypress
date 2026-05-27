@@ -11,13 +11,13 @@ describe('Casos de prueba de FRONT', () => {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVVRlc3QiLCJzdWIiOiJVc2VyIiwianRpIjoiZDJkMmE3YmItMTAxNy00OGI5LTkyYmItMmI5ZWNjNzQwNDhlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsInVzZXJJZCI6IjEwNjIiLCJleHAiOjE3Nzk5ODQ2NDMsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzY0LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzY0LyJ9.Mi2I9-_06LP39mD3zMDFr-CGN0mDZ7G48E7sIMrVJxo'
+        authorization: ''
       },
       body: ''
   }).then((response) => {
       expect(response.status).to.eq(200)})
 
-      
+
     cy.visit('https://app.bookdbqa.online/login')
     cy.get('input[formcontrolname="username"]').type('UTest')
     cy.get('input[formcontrolname="password"]').type('Utest123')
