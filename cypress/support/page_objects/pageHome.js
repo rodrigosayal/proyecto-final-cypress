@@ -12,6 +12,10 @@ class pageHome {
         cy.get('app-addtowishlist').first().contains('favorite').click();
     }
 
+    verifyAddedToWishlistMessage() {
+        cy.contains('Added to Wishlist!!!').should('be.visible');
+    }
+
 
 
 } module.exports = new pageHome();
