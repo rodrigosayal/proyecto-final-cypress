@@ -83,3 +83,21 @@ Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
         });
     });
 });
+
+Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
+    cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        failOnStatusCode: false, 
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json'
+        },
+        body: {
+            username: username,
+            password: password
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse);
+    });
+});

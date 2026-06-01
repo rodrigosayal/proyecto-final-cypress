@@ -66,10 +66,12 @@ describe('Casos de prueba de APIs', () => {
 
     })
 
-    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
+    it.skip('Validar inicio de sesión exitosamente API 1 | Ignacio Martin', () => {
+        cy.postLoginAPI(user.name, user.password, 200);
     })
 
-    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
+    it.skip('Validar intento de inicio de sesión fallido con contraseña incorrecta API 2 | Ignacio Martin', () => {
+        cy.postLoginAPI(user.name, 'ContrasenaInvalida123', 401);
     })
 
 
