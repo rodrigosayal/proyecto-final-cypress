@@ -74,5 +74,11 @@ describe('Casos de prueba de APIs', () => {
         cy.postLoginAPI(user.name, 'ContrasenaInvalida123', 401);
     })
 
+    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
+    })
+
+    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
+    })
+
 
 })
