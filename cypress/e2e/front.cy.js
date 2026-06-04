@@ -38,8 +38,10 @@ describe('Casos de prueba de FRONT', () => {
     pageCart.verifyOrderSummary('Harry Potter and the Chamber of Secrets');
     
     // Llamamos a la nueva función con los datos correspondientes
-    pageCart.fillShippingAddress('Juan', 'Av. Independencia 2057', 'Av. Congreso 5965', '123456', 'Buenos Aires');
+    //pageCart.fillShippingAddress('Juan', 'Av. Independencia 2057', 'Av. Congreso 5965', '123456', 'Buenos Aires');
     
+    cy.fillShippingAddress(user.name, user.address1, user.address2, user.pincode, user.state)
+
     pageCart.clickPlaceOrderButton();
 
     // Paso 7: Validación final en el historial de órdenes
@@ -48,36 +50,23 @@ describe('Casos de prueba de FRONT', () => {
   }) 
 
   it.only('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
-    // PRECONDICIÓN: Limpiamos la wishlist por API antes de interactuar con la interfaz
     cy.deleteWishlistAPI(user.userId, user.name, user.password);
 
     cy.visit(url.login);
     cy.login(user.name, user.password);
 
-    // Acción Paso 1: MIGRADO AL PAGE OBJECT
-    pageHome.addFirstBookToWishlist(); // Invocación limpia mediante el objeto de página
+    cy.addBookToWishlistAndCheckVisible('1')
 
-    // Respuesta del sistema Paso 1: Validar notificaciones y badges en el nav
-    pageHome.verifyAddedToWishlistMessage(); 
-    componentNav.validationNumberWishlistBadge('1');
-
-    // Acción Paso 2: Ir a la sección Wishlist desde la barra de navegación
     componentNav.goToWishlist();
 
-    // Respuesta del sistema Paso 2: Validar que cargó la pantalla interna
     pageWishlist.verifyWishlistUrl();
 
-    // Acción Paso 3: Vaciar la lista de deseos
     pageWishlist.clickClearWishlistButton();
-    
-    // Respuesta del sistema Paso 3: Validar mensajes y contadores en 0
     pageWishlist.verifyEmptyWishlistMessage();
     componentNav.validationNumberWishlistBadge('0');
 
-    // Acción Paso 4: Hacer clic en continuar comprando para regresar al Home
     pageWishlist.clickContinueShoppingButton();
 
-    // Respuesta del sistema Paso 4: Validar regreso al Home de forma segura
     cy.url().should('eq', url.home);
     pageHome.isBookVisible();
   })

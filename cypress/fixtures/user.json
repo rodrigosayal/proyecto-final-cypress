@@ -2,5 +2,11 @@
   "userId": "1062",
   "name": "UTest",
   "password": "Utest123",
-  "token": ""
+  "token": "",
+  "formName": "Juan",
+  "address1": "Av. Independencia 2057",
+  "address2": "Av. Congreso 5965",
+  "pincode": "123456",
+  "state": "Buenos Aires"
+
 }

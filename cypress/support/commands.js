@@ -1,10 +1,27 @@
 const pageLogin = require('../support/page_objects/pageLogin')
+const pageCart = require('../support/page_objects/pageCart')
+const pageHome = require('../support/page_objects/pageHome')
+const componentNav = require('../support/page_objects/componentNav')
 
 Cypress.Commands.add('login', (name, password) => {
     pageLogin.typeUserName(name);
     pageLogin.typeUserPassword(password);
     pageLogin.clickLoginButton();
 })
+
+
+Cypress.Commands.add('fillShippingAddress', (name, address1, address2, pincode, state) => {
+    pageCart.fillShippingName(name)
+
+    pageCart.fillShippingAddress1(address1)
+
+    pageCart.fillShippingAddress2(address2)
+
+    pageCart.fillShippingPincode(pincode)
+
+    pageCart.fillShippingState(state)
+})
+
 
 Cypress.Commands.add('deleteCartAPI', (userId) => {
     cy.request({
@@ -22,35 +39,36 @@ Cypress.Commands.add('deleteCartAPI', (userId) => {
 
 
 Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
-    
-cy.request({
-            method: 'POST',
-            url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
-            failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                authorization: token,
-            },
-            body:
-            {
-                "orderDetails": [
-                    {
-                        "book": {
-                            "bookId": 3,
-                            "title": "Harry Potter and the Prisoner of Azkaban",
-                            "author": "JKR",
-                            "category": "Romance",
-                            "price": 213,
-                            "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
-                        },
-                        "quantity": 1
-                    }
-                ],
-                "cartTotal": 213
-            }
-        }).then((response) => {
-      expect(response.status).to.eq(codeResponse)})
+
+    cy.request({
+        method: 'POST',
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
+        failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            authorization: token,
+        },
+        body:
+        {
+            "orderDetails": [
+                {
+                    "book": {
+                        "bookId": 3,
+                        "title": "Harry Potter and the Prisoner of Azkaban",
+                        "author": "JKR",
+                        "category": "Romance",
+                        "price": 213,
+                        "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
+                    },
+                    "quantity": 1
+                }
+            ],
+            "cartTotal": 213
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse)
+    })
 
 })
 
@@ -71,12 +89,12 @@ Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
         cy.request({
             method: 'DELETE',
             url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
-            failOnStatusCode: false, 
+            failOnStatusCode: false,
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
                 // Enviamos el Bearer Token obligatorio para el 401
-                authorization: `Bearer ${token}` 
+                authorization: `Bearer ${token}`
             }
         }).then((deleteResponse) => {
             expect(deleteResponse.status).to.be.oneOf([200, 204, 404]);
@@ -88,7 +106,7 @@ Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
     cy.request({
         method: 'POST',
         url: 'https://app.bookdbqa.online/api/login',
-        failOnStatusCode: false, 
+        failOnStatusCode: false,
         headers: {
             accept: 'application/json',
             'content-type': 'application/json'
@@ -101,3 +119,9 @@ Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
         expect(response.status).to.eq(codeResponse);
     });
 });
+
+Cypress.Commands.add('addBookToWishlistAndCheckVisible', (amount) => {
+    pageHome.addFirstBookToWishlist();
+    pageHome.verifyAddedToWishlistMessage();
+    componentNav.validationNumberWishlistBadge(amount);
+})

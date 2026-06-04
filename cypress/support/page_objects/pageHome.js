@@ -9,7 +9,7 @@ class pageHome {
     }
 
     addFirstBookToWishlist() {
-        cy.get('app-addtowishlist').first().contains('favorite').click();
+        cy.get('app-addtowishlist').contains('favorite').click();
     }
 
     verifyAddedToWishlistMessage() {

@@ -16,13 +16,28 @@ class pageCart {
     }
 
     // NUEVO MÉTODO: Rellena los datos obligatorios del formulario
-    fillShippingAddress(name, address1, address2, pincode, state) {
+
+    fillShippingName(name) {
         cy.get('input[formcontrolname="name"]').type(name);
+    }
+
+    fillShippingAddress1(address1) {
         cy.get('input[formcontrolname="addressLine1"]').type(address1);
+    }
+
+    fillShippingAddress2(address2) {
         cy.get('input[formcontrolname="addressLine2"]').type(address2);
+    }
+
+    fillShippingPincode(pincode) {
         cy.get('input[placeholder="Pincode"]').type(pincode);
+    }
+
+    fillShippingState(state) {
         cy.get('input[formcontrolname="state"]').type(state);
     }
+
+
 
     clickPlaceOrderButton() {
         cy.get('button').contains('Place Order').click();
