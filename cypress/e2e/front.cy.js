@@ -9,7 +9,7 @@ describe('Casos de prueba de FRONT', () => {
 
   
 
- it('Comprar carrito exitosamente y visualizar orden de compra', () => {
+ it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
 
     cy.deleteCartAPI(user.userId);
 
@@ -49,7 +49,7 @@ describe('Casos de prueba de FRONT', () => {
 
   }) 
 
-  it.only('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
+  it('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
     cy.deleteWishlistAPI(user.userId, user.name, user.password);
 
     cy.visit(url.login);
