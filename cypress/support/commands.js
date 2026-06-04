@@ -10,7 +10,7 @@ Cypress.Commands.add('login', (name, password) => {
 })
 
 
-Cypress.Commands.add('fillShippingAddress', (name, address1, address2, pincode, state) => {
+Cypress.Commands.add('fillShippingForm', (name, address1, address2, pincode, state) => {
     pageCart.fillShippingName(name)
 
     pageCart.fillShippingAddress1(address1)

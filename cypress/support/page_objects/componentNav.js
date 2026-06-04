@@ -16,4 +16,8 @@ class componentNav {
         });
     }
 
+    goToShoppingCart() {
+        cy.get('mat-icon').contains('shopping_cart').click();
+    }
+
 } module.exports = new componentNav();
