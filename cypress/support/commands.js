@@ -120,6 +120,15 @@ Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
     });
 });
 
+Cypress.Commands.add('verifyOrderHistoryDetails', (bookTitle, quantity, totalPrice) => {
+    pageCart.verifyMyOrdersUrl();
+    pageCart.clickMostRecentOrderRow();
+    pageCart.verifyOrderDetailContainersVisible();
+    pageCart.verifyBookTitleInDetails(bookTitle);
+    pageCart.verifyBookQuantityInDetails(quantity);
+    pageCart.verifyOrderTotalInDetails(totalPrice);
+});
+
 Cypress.Commands.add('addBookToWishlistAndCheckVisible', (amount) => {
     pageHome.addFirstBookToWishlist();
     pageHome.verifyAddedToWishlistMessage();

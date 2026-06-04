@@ -48,22 +48,42 @@ class pageCart {
         cy.contains('Order placed successfully!!!').should('be.visible');
     }
 
-    verifyOrderInTable() { // Eliminamos el parámetro userId que no se usa visualmente
-        // 1. Validamos que nos encontremos efectivamente en la URL de órdenes
-        cy.url().should('include', '/myorders');
-        
-        // 2. Hacemos clic en la primera fila de la tabla (la orden más reciente)
-        cy.get('tr.mat-mdc-row').first().click();
+    verifyOrderSuccessMessage() {
+        cy.contains('Order placed successfully!!!').should('be.visible');
+    }
 
-        // 3. Verificamos que los contenedores del detalle de la orden se hagan visibles
+    // 1. Valida la redirección correcta
+    verifyMyOrdersUrl() {
+        cy.url().should('include', '/myorders');
+    }
+
+    // 2. Ejecuta la acción de expandir la orden más reciente
+    clickMostRecentOrderRow() {
+        cy.get('tr.mat-mdc-row').first().click();
+    }
+
+    // 3. Valida que los contenedores del detalle se desplieguen correctamente
+    verifyOrderDetailContainersVisible() {
         cy.get('mat-card.mat-mdc-card').first().should('be.visible');
         cy.get('table.details-table').first().should('be.visible');
+    }
 
-        // 4. Validamos el contenido interno específico del detalle de la compra
+    // 4. Valida los elementos específicos de la compra usando un contenedor común
+    verifyBookTitleInDetails(bookTitle) {
         cy.get('table.details-table').first().within(() => {
-            cy.contains('Harry Potter and the Chamber of Secrets').should('be.visible');
-            cy.contains('1').should('be.visible');
-            cy.contains('₹236.00').should('be.visible');
+            cy.contains(bookTitle).should('be.visible');
+        });
+    }
+
+    verifyBookQuantityInDetails(quantity) {
+        cy.get('table.details-table').first().within(() => {
+            cy.contains(quantity).should('be.visible');
+        });
+    }
+
+    verifyOrderTotalInDetails(totalPrice) {
+        cy.get('table.details-table').first().within(() => {
+            cy.contains(totalPrice).should('be.visible');
         });
     }
 

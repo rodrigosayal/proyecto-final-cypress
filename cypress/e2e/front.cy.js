@@ -27,14 +27,16 @@ describe('Casos de prueba de FRONT', () => {
     componentNav.goToShoppingCart();
 
     pageCart.verifyBookInCart('Harry Potter and the Chamber of Secrets');
-    pageCart.clickCheckoutButton();
+    
+    pageCart.clickCheckoutButton(); 
 
     pageCart.verifyOrderSummary('Harry Potter and the Chamber of Secrets');
     
-    cy.fillShippingForm(user.name, user.address1, user.address2, user.pincode, user.state)
+    cy.fillShippingForm(user.name, user.address1, user.address2, user.pincode, user.state);
 
     pageCart.clickPlaceOrderButton();
-    pageCart.verifyOrderInTable();
+
+    cy.verifyOrderHistoryDetails('Harry Potter and the Chamber of Secrets', '1', '₹236.00');
 
   })
 
