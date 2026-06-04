@@ -37,16 +37,28 @@ Cypress.Commands.add('deleteCartAPI', (userId) => {
     })
 })
 
+Cypress.Commands.add('loginAPI', (username, password) => {
+    return cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        body: {
+            username,
+            password
+        }
+    }).then((response) => {
+        return response.body.token;
+    });
+});
+
 
 Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
     cy.request({
         method: 'POST',
-        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, 
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, // <-- Dinámico por parámetro
         failOnStatusCode: false, 
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',
-            // Si le pasamos token concatena Bearer, si viene vacío lo deja en blanco para el caso negativo
             authorization: token ? `Bearer ${token}` : ''
         },
         body: {

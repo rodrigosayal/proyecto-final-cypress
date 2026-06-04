@@ -37,10 +37,7 @@ class pageCart {
         cy.get('button').contains('Place Order').click();
     }
 
-    verifyOrderSuccessMessage() {
-        cy.contains('Order placed successfully!!!').should('be.visible');
-    }
-
+    // UNIFICADO: Eliminamos la función duplicada que estaba justo acá abajo
     verifyOrderSuccessMessage() {
         cy.contains('Order placed successfully!!!').should('be.visible');
     }
