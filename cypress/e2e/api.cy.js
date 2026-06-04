@@ -13,11 +13,11 @@ describe('Casos de prueba de APIs', () => {
         cy.postCheckOutAPI(user.userId, '', 401);
     })
 
-    it.skip('Validar inicio de sesión exitosamente API 1 | Ignacio Martin', () => {
+    it('Validar inicio de sesión exitosamente API 1 | Ignacio Martin', () => {
         cy.postLoginAPI(user.name, user.password, 200);
     })
 
-    it.skip('Validar intento de inicio de sesión fallido con contraseña incorrecta API 2 | Ignacio Martin', () => {
+    it('Validar intento de inicio de sesión fallido con contraseña incorrecta API 2 | Ignacio Martin', () => {
         cy.postLoginAPI(user.name, 'ContrasenaInvalida123', 401);
     })
 
