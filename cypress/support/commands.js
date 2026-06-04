@@ -125,3 +125,9 @@ Cypress.Commands.add('addBookToWishlistAndCheckVisible', (amount) => {
     pageHome.verifyAddedToWishlistMessage();
     componentNav.validationNumberWishlistBadge(amount);
 })
+
+Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
+    pageWishlist.clickClearWishlistButton();
+    pageWishlist.verifyEmptyWishlistMessage();
+    componentNav.validationNumberWishlistBadge(amount);
+})

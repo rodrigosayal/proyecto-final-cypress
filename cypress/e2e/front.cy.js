@@ -50,9 +50,7 @@ describe('Casos de prueba de FRONT', () => {
 
     pageWishlist.verifyWishlistUrl();
 
-    pageWishlist.clickClearWishlistButton();
-    pageWishlist.verifyEmptyWishlistMessage();
-    componentNav.validationNumberWishlistBadge('0');
+    cy.deleteBookFromWishlistAndCheckVisible('0')
 
     pageWishlist.clickContinueShoppingButton();
 
