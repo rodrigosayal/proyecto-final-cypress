@@ -43,7 +43,7 @@ Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
     cy.request({
         method: 'POST',
         url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
-        failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
+        failOnStatusCode: false, 
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',

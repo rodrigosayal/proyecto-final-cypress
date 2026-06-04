@@ -5,7 +5,7 @@ describe('Casos de prueba de APIs', () => {
         cy.request({
             method: 'POST',
             url: 'https://app.bookdbqa.online/api/CheckOut/1058',
-            failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
+            failOnStatusCode: false, 
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
@@ -38,7 +38,7 @@ describe('Casos de prueba de APIs', () => {
         cy.request({
             method: 'POST',
             url: 'https://app.bookdbqa.online/api/CheckOut/1058',
-            failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
+            failOnStatusCode: false, 
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
