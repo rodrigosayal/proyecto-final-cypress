@@ -39,18 +39,17 @@ Cypress.Commands.add('deleteCartAPI', (userId) => {
 
 
 Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
-
     cy.request({
         method: 'POST',
-        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, 
         failOnStatusCode: false, 
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',
-            authorization: token,
+            // Si le pasamos token concatena Bearer, si viene vacío lo deja en blanco para el caso negativo
+            authorization: token ? `Bearer ${token}` : ''
         },
-        body:
-        {
+        body: {
             "orderDetails": [
                 {
                     "book": {
@@ -67,10 +66,9 @@ Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
             "cartTotal": 213
         }
     }).then((response) => {
-        expect(response.status).to.eq(codeResponse)
-    })
-
-})
+        expect(response.status).to.eq(codeResponse);
+    });
+});
 
 Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
     // 1. Hacemos un POST al login de la API para obtener el Token de acceso
