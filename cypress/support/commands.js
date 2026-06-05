@@ -83,7 +83,6 @@ Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
 });
 
 Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
-    // 1. Hacemos un POST al login de la API para obtener el Token de acceso
     cy.request({
         method: 'POST',
         url: 'https://app.bookdbqa.online/api/login',
@@ -92,10 +91,8 @@ Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
             password: password
         }
     }).then((loginResponse) => {
-        // Extraemos el token que devuelve el backend
         const token = loginResponse.body.token;
 
-        // 2. Ahora sí ejecutamos el DELETE enviando el Token en los headers
         cy.request({
             method: 'DELETE',
             url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
@@ -103,7 +100,6 @@ Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
-                // Enviamos el Bearer Token obligatorio para el 401
                 authorization: `Bearer ${token}`
             }
         }).then((deleteResponse) => {
