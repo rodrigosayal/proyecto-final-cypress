@@ -66,9 +66,9 @@ describe('Casos de prueba de FRONT', () => {
     cy.login(user.name, user.password)
     cy.url().should('include', url.home)
 
-    cy.contains('Drama').click()
+    pageCategory.clickCategory('Drama');
 
-    cy.get('app-book-card').should('have.length.greaterThan', 0)
+    pageCategory.verifyBooksVisible();
 })
 
   it('Titulo caso de prueba 4 | Nombre Alumno', () => {
