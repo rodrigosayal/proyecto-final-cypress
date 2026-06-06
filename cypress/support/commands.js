@@ -1,25 +1,148 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const pageLogin = require('../support/page_objects/pageLogin')
+const pageCart = require('../support/page_objects/pageCart')
+const pageHome = require('../support/page_objects/pageHome')
+const componentNav = require('../support/page_objects/componentNav')
+
+Cypress.Commands.add('login', (name, password) => {
+    pageLogin.typeUserName(name);
+    pageLogin.typeUserPassword(password);
+    pageLogin.clickLoginButton();
+})
+
+
+Cypress.Commands.add('fillShippingForm', (name, address1, address2, pincode, state) => {
+    pageCart.fillShippingName(name)
+
+    pageCart.fillShippingAddress1(address1)
+
+    pageCart.fillShippingAddress2(address2)
+
+    pageCart.fillShippingPincode(pincode)
+
+    pageCart.fillShippingState(state)
+})
+
+
+Cypress.Commands.add('deleteCartAPI', (userId) => {
+    cy.request({
+        method: 'DELETE',
+        url: `https://app.bookdbqa.online/api/shoppingcart/${userId}`,
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            authorization: ''
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200)
+    })
+})
+
+Cypress.Commands.add('loginAPI', (username, password) => {
+    return cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        body: {
+            username,
+            password
+        }
+    }).then((response) => {
+        return response.body.token;
+    });
+});
+
+
+Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
+    cy.request({
+        method: 'POST',
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, // <-- Dinámico por parámetro
+        failOnStatusCode: false, 
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            authorization: token ? `Bearer ${token}` : ''
+        },
+        body: {
+            "orderDetails": [
+                {
+                    "book": {
+                        "bookId": 3,
+                        "title": "Harry Potter and the Prisoner of Azkaban",
+                        "author": "JKR",
+                        "category": "Romance",
+                        "price": 213,
+                        "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
+                    },
+                    "quantity": 1
+                }
+            ],
+            "cartTotal": 213
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse);
+    });
+});
+
+Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
+    cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        body: {
+            username: username,
+            password: password
+        }
+    }).then((loginResponse) => {
+        const token = loginResponse.body.token;
+
+        cy.request({
+            method: 'DELETE',
+            url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        }).then((deleteResponse) => {
+            expect(deleteResponse.status).to.be.oneOf([200, 204, 404]);
+        });
+    });
+});
+
+Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
+    cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json'
+        },
+        body: {
+            username: username,
+            password: password
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse);
+    });
+});
+
+Cypress.Commands.add('verifyOrderHistoryDetails', (bookTitle, quantity, totalPrice) => {
+    pageCart.verifyMyOrdersUrl();
+    pageCart.clickMostRecentOrderRow();
+    pageCart.verifyOrderDetailContainersVisible();
+    pageCart.verifyBookTitleInDetails(bookTitle);
+    pageCart.verifyBookQuantityInDetails(quantity);
+    pageCart.verifyOrderTotalInDetails(totalPrice);
+});
+
+Cypress.Commands.add('addBookToWishlistAndCheckVisible', (amount) => {
+    pageHome.addFirstBookToWishlist();
+    pageHome.verifyAddedToWishlistMessage();
+    componentNav.validationNumberWishlistBadge(amount);
+})
+
+Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
+    pageWishlist.clickClearWishlistButton();
+    pageWishlist.verifyEmptyWishlistMessage();
+    componentNav.validationNumberWishlistBadge(amount);
+})

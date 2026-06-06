@@ -1,33 +1,63 @@
+import user from '../fixtures/user.json'
+import url from '../fixtures/url.json'
+const pageHome = require('../support/page_objects/pageHome')
+const componentNav = require('../support/page_objects/componentNav')
+const pageCart = require('../support/page_objects/pageCart')
+const pageWishlist = require('../support/page_objects/pageWishlist')
+
 describe('Casos de prueba de FRONT', () => {
 
-  it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
-    //Accion paso 1:
-    cy.visit('https://app.bookdbqa.online/login')
-    cy.get('input[formcontrolname="username"]').type('Automata')
-    cy.get('input[formcontrolname="password"]').type('Automata123')
-    cy.get('app-login button').contains('Login').click()
+  
 
-    //Respuesta del sistema paso 1:
-    cy.url().should('include', 'https://app.bookdbqa.online/')
-    cy.get('app-book-card').contains('Harry Potter and the Chamber of Secrets').should('be.visible')
-    //cy.get('#mat-badge-content-0').contains('0').should('be.visible')
+ it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
 
-    //Accion paso 2:
-    cy.get('button').contains('Add to Cart').click()
+    cy.deleteCartAPI(user.userId);
 
-    //Respuesta del sistema paso 2:
-    cy.contains('One Item added to cart').should('be.visible')
-    //cy.get('#mat-badge-content-0').contains('1').should('be.visible')
+    cy.visit(url.login)
+    cy.login(user.name, user.password);
+    cy.url().should('include', url.home)
 
-    //Accion paso 3:
-    cy.get('.mdc-icon-button.mat-mdc-icon-button.mat-mdc-button-base.mat-unthemed').contains('shopping_cart').click()
+    pageHome.isBookVisible();
+    componentNav.validationNumberCartBadge('0');
+    pageHome.clickAddToCartButton();
 
+    pageHome.verifySuccessAddToCartMessage(); 
+    componentNav.validationNumberCartBadge('1');
 
+    componentNav.goToShoppingCart();
 
+    pageCart.verifyBookInCart('Harry Potter and the Chamber of Secrets');
+    
+    pageCart.clickCheckoutButton(); 
+
+    pageCart.verifyOrderSummary('Harry Potter and the Chamber of Secrets');
+    
+    cy.fillShippingForm(user.name, user.address1, user.address2, user.pincode, user.state);
+
+    pageCart.clickPlaceOrderButton();
+
+    cy.verifyOrderHistoryDetails('Harry Potter and the Chamber of Secrets', '1', '₹236.00');
 
   })
 
-  it('Titulo caso de prueba 2 | Nombre Alumno', () => {
+  it('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
+    cy.deleteWishlistAPI(user.userId, user.name, user.password);
+
+    cy.visit(url.login);
+    cy.login(user.name, user.password);
+
+    cy.addBookToWishlistAndCheckVisible('1')
+
+    componentNav.goToWishlist();
+
+    pageWishlist.verifyWishlistUrl();
+
+    cy.deleteBookFromWishlistAndCheckVisible('0')
+
+    pageWishlist.clickContinueShoppingButton();
+
+    cy.url().should('eq', url.home);
+    pageHome.isBookVisible();
   })
 
   it('Titulo caso de prueba 3 | Nombre Alumno', () => {

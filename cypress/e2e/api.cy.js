@@ -1,69 +1,30 @@
+import user from '../fixtures/user.json'
+
 describe('Casos de prueba de APIs', () => {
 
     it('API | Comprar carrito exitosamente', () => {
-
-        cy.request({
-            method: 'POST',
-            url: 'https://app.bookdbqa.online/api/CheckOut/1058',
-            failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQXV0byIsInN1YiI6IlVzZXIiLCJqdGkiOiI4NjcxZWY4Zi1hYTBkLTRjYTQtYTBlNC1jY2VlN2U1MjQ5YzMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwidXNlcklkIjoiMTA1OCIsImV4cCI6MTc3OTM5ODU3MSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjQvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjQvIn0.PivrnMJZmkgZieyg5jgiy5wj54T58SvSo-aSw8NZd2E',
-            },
-            body:
-            {
-                "orderDetails": [
-                    {
-                        "book": {
-                            "bookId": 3,
-                            "title": "Harry Potter and the Prisoner of Azkaban",
-                            "author": "JKR",
-                            "category": "Romance",
-                            "price": 213,
-                            "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
-                        },
-                        "quantity": 1
-                    }
-                ],
-                "cartTotal": 213
-            }
-        }).then((response) => {
-      expect(response.status).to.eq(200)})
-      
-    })
+        cy.loginAPI(user.name, user.password)
+            .then((token) => {
+                cy.postCheckOutAPI(user.userId, token, 200);
+            });
+    });
 
     it('API | Error al comprar carrito sin token', () => {
+        cy.postCheckOutAPI(user.userId, '', 401);
+    })
 
-        cy.request({
-            method: 'POST',
-            url: 'https://app.bookdbqa.online/api/CheckOut/1058',
-            failOnStatusCode: false, // importante para que cypress no falle automaticamente ante un error 400 o 500
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                authorization: '',
-            },
-            body:
-            {
-                "orderDetails": [
-                    {
-                        "book": {
-                            "bookId": 3,
-                            "title": "Harry Potter and the Prisoner of Azkaban",
-                            "author": "JKR",
-                            "category": "Romance",
-                            "price": 213,
-                            "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
-                        },
-                        "quantity": 1
-                    }
-                ],
-                "cartTotal": 213
-            }
-        }).then((response) => {
-      expect(response.status).to.eq(401)})
+    it('Validar inicio de sesión exitosamente API 1 | Ignacio Martin', () => {
+        cy.postLoginAPI(user.name, user.password, 200);
+    })
 
+    it('Validar intento de inicio de sesión fallido con contraseña incorrecta API 2 | Ignacio Martin', () => {
+        cy.postLoginAPI(user.name, 'PAssword123', 401);
+    })
+
+    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
+    })
+
+    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
     })
 
     it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
