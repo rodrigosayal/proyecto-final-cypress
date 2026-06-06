@@ -2,6 +2,7 @@ const pageLogin = require('../support/page_objects/pageLogin')
 const pageCart = require('../support/page_objects/pageCart')
 const pageHome = require('../support/page_objects/pageHome')
 const componentNav = require('../support/page_objects/componentNav')
+const pageWishlist = require('../support/page_objects/pageWishlist')
 
 Cypress.Commands.add('login', (name, password) => {
     pageLogin.typeUserName(name);
