@@ -18,7 +18,7 @@ describe('Casos de prueba de APIs', () => {
     })
 
     it('Validar intento de inicio de sesión fallido con contraseña incorrecta API 2 | Ignacio Martin', () => {
-        cy.postLoginAPI(user.name, 'ContrasenaInvalida123', 401);
+        cy.postLoginAPI(user.name, 'PAssword123', 401);
     })
 
     it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
