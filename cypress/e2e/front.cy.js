@@ -4,6 +4,7 @@ const pageHome = require('../support/page_objects/pageHome')
 const componentNav = require('../support/page_objects/componentNav')
 const pageCart = require('../support/page_objects/pageCart')
 const pageWishlist = require('../support/page_objects/pageWishlist')
+const pageCategory = require('../support/page_objects/pageCategory')
 
 describe('Casos de prueba de FRONT', () => {
 
@@ -40,7 +41,7 @@ describe('Casos de prueba de FRONT', () => {
 
   })
 
-  it.only('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
+  it('Agregar libro al wishlist, vaciar la lista y regresar al home | Ignacio Martin', () => {
     cy.deleteWishlistAPI(user.userId, user.name, user.password);
 
     cy.visit(url.login);
@@ -60,8 +61,15 @@ describe('Casos de prueba de FRONT', () => {
     pageHome.isBookVisible();
   })
 
-  it('Titulo caso de prueba 3 | Nombre Alumno', () => {
-  })
+   it('Filtrar libros por categoría Drama | Rodrigo Sayal', () => {
+    cy.visit(url.login)
+    cy.login(user.name, user.password)
+    cy.url().should('include', url.home)
+
+    cy.contains('Drama').click()
+
+    cy.get('app-book-card').should('have.length.greaterThan', 0)
+})
 
   it('Titulo caso de prueba 4 | Nombre Alumno', () => {
   })
