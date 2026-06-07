@@ -148,14 +148,8 @@ Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
     componentNav.validationNumberWishlistBadge(amount);
 })
 
-
-Cypress.Commands.add('getOrdersWithTokenAPI', (userId, username, password) => {
-    cy.request({
-        method: 'POST',
-        url: 'https://app.bookdbqa.online/api/login',
-        body: { username: username, password: password }
-    }).then((response) => {
-        const token = response.body.token
+Cypress.Commands.add('getOrdersWithTokenAPI', (userId, username, password, codeResponse) => {
+    cy.loginAPI(username, password).then((token) => {
         cy.request({
             method: 'GET',
             url: `https://app.bookdbqa.online/api/Order/${userId}`,
@@ -165,12 +159,12 @@ Cypress.Commands.add('getOrdersWithTokenAPI', (userId, username, password) => {
                 authorization: `Bearer ${token}`
             }
         }).then((response) => {
-            expect(response.status).to.eq(200)
+            expect(response.status).to.eq(codeResponse)
         })
     })
 })
 
-Cypress.Commands.add('getOrdersWithoutTokenAPI', (userId) => {
+Cypress.Commands.add('getOrdersWithoutTokenAPI', (userId, codeResponse) => {
     cy.request({
         method: 'GET',
         url: `https://app.bookdbqa.online/api/Order/${userId}`,
@@ -180,6 +174,6 @@ Cypress.Commands.add('getOrdersWithoutTokenAPI', (userId) => {
             authorization: ''
         }
     }).then((response) => {
-        expect(response.status).to.eq(401)
+        expect(response.status).to.eq(codeResponse)
     })
 })

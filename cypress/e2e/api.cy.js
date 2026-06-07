@@ -22,16 +22,15 @@ describe('Casos de prueba de APIs', () => {
     })
 
    
-  
-      it('Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
-    cy.getOrdersWithTokenAPI(user.userId, user.name, user.password)
-})
-
+ it('Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
+        cy.getOrdersWithTokenAPI(user.userId, user.name, user.password, 200)
+    })
 
     it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
-    cy.getOrdersWithoutTokenAPI(user.userId)
-})
+        cy.getOrdersWithoutTokenAPI(user.userId, 401)
+    })
 
+    
     it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
     })
 
