@@ -21,19 +21,19 @@ describe('Casos de prueba de APIs', () => {
         cy.postLoginAPI(user.name, 'PAssword123', 401);
     })
 
-    it('Borrar libros de la wishlist con token| Franco Nicolas Meza', () => {
+    it('Borrar libros de la wishlist con token API 3 | Franco Nicolas Meza', () => {
         cy.allDeleteWishlistAPI(user.userId, user.name, user.password, 200)
         })
 
-    it('Borrar items de la wishlist sin token | Franco Nicolas Meza', () => {
+    it('Borrar items de la wishlist sin token API 4 | Franco Nicolas Meza', () => {
         cy.deleteWishlistUnauthorizedAPI(user.userId, 401)
     })
    
- it('Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
+ it('Obtener historial de órdenes exitosamente API 5 | Rodrigo Sayal', () => {
         cy.getOrdersWithTokenAPI(user.userId, user.name, user.password, 200)
     })
 
-    it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
+    it('Error al obtener historial de órdenes sin token API 6 | Rodrigo Sayal', () => {
         cy.getOrdersWithoutTokenAPI(user.userId, 401)
     })
 
