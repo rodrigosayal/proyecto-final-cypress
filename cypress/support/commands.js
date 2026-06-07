@@ -55,7 +55,7 @@ Cypress.Commands.add('loginAPI', (username, password) => {
 Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
     cy.request({
         method: 'POST',
-        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, // <-- Dinámico por parámetro
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
         failOnStatusCode: false, 
         headers: {
             accept: 'application/json',
