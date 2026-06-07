@@ -21,14 +21,20 @@ describe('Casos de prueba de APIs', () => {
         cy.postLoginAPI(user.name, 'PAssword123', 401);
     })
 
-    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
+   
+    it(' Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
+    cy.request({
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        body: { username: user.name, password: user.password }
+    }).then((response) => {
+        cy.getOrdersWithTokenAPI(user.userId, response.body.token)
     })
+})
 
-    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
-    })
-
-    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
-    })
+it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
+    cy.getOrdersWithoutTokenAPI(user.userId)
+})
 
     it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
     })

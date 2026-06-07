@@ -147,3 +147,32 @@ Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
     pageWishlist.verifyEmptyWishlistMessage();
     componentNav.validationNumberWishlistBadge(amount);
 })
+
+
+Cypress.Commands.add('getOrdersWithTokenAPI', (userId, token) => {
+    cy.request({
+        method: 'GET',
+        url: `https://app.bookdbqa.online/api/Order/${userId}`,
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
+            authorization: `Bearer ${token}`
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200)
+    })
+})
+
+Cypress.Commands.add('getOrdersWithoutTokenAPI', (userId) => {
+    cy.request({
+        method: 'GET',
+        url: `https://app.bookdbqa.online/api/Order/${userId}`,
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
+            authorization: ''
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(401)
+    })
+})
