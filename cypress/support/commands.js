@@ -149,17 +149,24 @@ Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
 })
 
 
-Cypress.Commands.add('getOrdersWithTokenAPI', (userId, token) => {
+Cypress.Commands.add('getOrdersWithTokenAPI', (userId, username, password) => {
     cy.request({
-        method: 'GET',
-        url: `https://app.bookdbqa.online/api/Order/${userId}`,
-        failOnStatusCode: false,
-        headers: {
-            accept: 'application/json',
-            authorization: `Bearer ${token}`
-        }
+        method: 'POST',
+        url: 'https://app.bookdbqa.online/api/login',
+        body: { username: username, password: password }
     }).then((response) => {
-        expect(response.status).to.eq(200)
+        const token = response.body.token
+        cy.request({
+            method: 'GET',
+            url: `https://app.bookdbqa.online/api/Order/${userId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+        })
     })
 })
 

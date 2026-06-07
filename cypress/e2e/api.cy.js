@@ -22,17 +22,13 @@ describe('Casos de prueba de APIs', () => {
     })
 
    
-    it(' Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
-    cy.request({
-        method: 'POST',
-        url: 'https://app.bookdbqa.online/api/login',
-        body: { username: user.name, password: user.password }
-    }).then((response) => {
-        cy.getOrdersWithTokenAPI(user.userId, response.body.token)
-    })
+  
+      it('Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
+    cy.getOrdersWithTokenAPI(user.userId, user.name, user.password)
 })
 
-it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
+
+    it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
     cy.getOrdersWithoutTokenAPI(user.userId)
 })
 
