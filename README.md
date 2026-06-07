@@ -42,12 +42,13 @@ Cada integrante del grupo tiene la responsabilidad de documentar y automatizar *
 * **Caso 1:** Comprar carrito exitosamente y visualizar orden de compra *(Grupal)*
 * **Caso 2:** API | Comprar carrito exitosamente *(Grupal)*
 * **Caso 3:** API | Error al comprar carrito sin token *(Grupal)*
-* **Caso 4:** `[Título del Caso FE]` | **Ignacio Martin**
-* **Caso 5:** API | `[Título del Caso API Exitoso]` | **Ignacio Martin**
-* **Caso 6:** API | `[Título del Caso API Error]` | **Ignacio Martin**
-* **Caso 7:** `[Título del Caso FE]` | **Rodrigo Sayal**
-* **Caso 8:** API | `[Título del Caso API Exitoso]` | **Rodrigo Sayal**
-* **Caso 9:** API | `[Título del Caso API Error]` | **Rodrigo Sayal**
+* **Caso 4:** `FRONT | Agregar libro al wishlist, vaciar el wishlist y regresar al home
+` | **Ignacio Martin**
+* **Caso 5:** API | `API | Validar inicio de sesión exitosamente` | **Ignacio Martin**
+* **Caso 6:** API | `API | Validar intento de inicio de sesión fallido con contraseña incorrecta` | **Ignacio Martin**
+* **Caso 7:** `FRONT | Filtrar libros por categoría Drama y verificar resultados` | **Rodrigo Sayal**
+* **Caso 8:** API | `API | Obtener historial de órdenes exitosamente` | **Rodrigo Sayal**
+* **Caso 9:** API | `API | Error al obtener historial de órdenes sin token` | **Rodrigo Sayal**
 * **Caso 10:** `[Título del Caso FE]` | **César Taddey**
 * **Caso 11:** API | `[Título del Caso API Exitoso]` | **César Taddey**
 * **Caso 12:** API | `[Título del Caso API Error]` | **César Taddey**
