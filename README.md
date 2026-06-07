@@ -45,7 +45,7 @@ Cada integrante del grupo tiene la responsabilidad de documentar y automatizar *
 * **Caso 4:** `FRONT | Agregar libro al wishlist, vaciar el wishlist y regresar al home
 ` | **Ignacio Martin**
 * **Caso 5:** API | `API | Validar inicio de sesión exitosamente` | **Ignacio Martin**
-* **Caso 6:** API | `VAPI | alidar intento de inicio de sesión fallido con contraseña incorrecta` | **Ignacio Martin**
+* **Caso 6:** API | `API | Validar intento de inicio de sesión fallido con contraseña incorrecta` | **Ignacio Martin**
 * **Caso 7:** `FRONT| 
 Filtrar libros por categoría Drama y verificar resultados` | **Rodrigo Sayal**
 * **Caso 8:** API | `API | Obtener historial de órdenes exitosamente` | **Rodrigo Sayal**
