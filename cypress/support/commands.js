@@ -2,6 +2,7 @@ const pageLogin = require('../support/page_objects/pageLogin')
 const pageCart = require('../support/page_objects/pageCart')
 const pageHome = require('../support/page_objects/pageHome')
 const componentNav = require('../support/page_objects/componentNav')
+const pageWishlist = require('../support/page_objects/pageWishlist')
 
 Cypress.Commands.add('login', (name, password) => {
     pageLogin.typeUserName(name);
@@ -58,7 +59,7 @@ Cypress.Commands.add('loginAPI', (username, password) => {
 Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
     cy.request({
         method: 'POST',
-        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`, // <-- Dinámico por parámetro
+        url: `https://app.bookdbqa.online/api/CheckOut/${userId}`,
         failOnStatusCode: false, 
         headers: {
             accept: 'application/json',
@@ -150,6 +151,37 @@ Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
     pageWishlist.verifyEmptyWishlistMessage();
     componentNav.validationNumberWishlistBadge(amount);
 })
+
+Cypress.Commands.add('getOrdersWithTokenAPI', (userId, username, password, codeResponse) => {
+    cy.loginAPI(username, password).then((token) => {
+        cy.request({
+            method: 'GET',
+            url: `https://app.bookdbqa.online/api/Order/${userId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(codeResponse)
+        })
+    })
+})
+
+Cypress.Commands.add('getOrdersWithoutTokenAPI', (userId, codeResponse) => {
+    cy.request({
+        method: 'GET',
+        url: `https://app.bookdbqa.online/api/Order/${userId}`,
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
+            authorization: ''
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse)
+    })
+})
+
 Cypress.Commands.add('allDeleteWishlistAPI', (userId, username, password, codeResponse) => { 
     cy.loginAPI(username, password).then((token) => {
         cy.request({

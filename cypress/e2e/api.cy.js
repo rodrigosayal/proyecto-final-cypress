@@ -21,17 +21,23 @@ describe('Casos de prueba de APIs', () => {
         cy.postLoginAPI(user.name, 'PAssword123', 401);
     })
 
-    it.only('Borrar libros de la wishlist con token| Franco Nicolas Meza', () => {
+    it('Borrar libros de la wishlist con token| Franco Nicolas Meza', () => {
         cy.allDeleteWishlistAPI(user.userId, user.name, user.password, 200)
         })
 
-    it.only('Borrar items de la wishlist sin token | Franco Nicolas Meza', () => {
+    it('Borrar items de la wishlist sin token | Franco Nicolas Meza', () => {
         cy.deleteWishlistUnauthorizedAPI(user.userId, 401)
     })
-
-    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
+   
+ it('Obtener historial de órdenes exitosamente API 3 | Rodrigo Sayal', () => {
+        cy.getOrdersWithTokenAPI(user.userId, user.name, user.password, 200)
     })
 
+    it('Error al obtener historial de órdenes sin token API 4 | Rodrigo Sayal', () => {
+        cy.getOrdersWithoutTokenAPI(user.userId, 401)
+    })
+
+    
     it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
     })
 

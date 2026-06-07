@@ -4,6 +4,7 @@ const pageHome = require('../support/page_objects/pageHome')
 const componentNav = require('../support/page_objects/componentNav')
 const pageCart = require('../support/page_objects/pageCart')
 const pageWishlist = require('../support/page_objects/pageWishlist')
+const pageCategory = require('../support/page_objects/pageCategory')
 
 describe('Casos de prueba de FRONT', () => {
 
@@ -60,7 +61,17 @@ describe('Casos de prueba de FRONT', () => {
     pageHome.isBookVisible();
   })
 
-  it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
+   it('Filtrar libros por categoría Drama | Rodrigo Sayal', () => {
+    cy.visit(url.login)
+    cy.login(user.name, user.password)
+    cy.url().should('include', url.home)
+
+    pageCategory.clickCategory('Drama');
+
+    pageCategory.verifyBooksVisible();
+})
+
+it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
     cy.deleteCartAPI(user.userId);
 
     cy.visit(url.login);
@@ -86,9 +97,6 @@ describe('Casos de prueba de FRONT', () => {
     pageCart.verifySuccessRemoved();
     pageCart.matColumnQualityVisible(1);
 
-  })
-
-  it('Titulo caso de prueba 4 | Nombre Alumno', () => {
   })
 
   it('Titulo caso de prueba 5 | Nombre Alumno', () => {
