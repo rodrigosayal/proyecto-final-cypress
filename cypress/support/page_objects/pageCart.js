@@ -72,5 +72,33 @@ class pageCart {
             cy.contains(totalPrice).should('be.visible');
         });
     }
+    addCircleButton() {
+        cy.contains('button', 'add_circle').click();
+    }
+    verifySuccessAdd() {
+        cy.contains('One Item added to cart').should('be.visible');
+
+    }
+    matColumnQualityVisible(cant) {
+        cy.get('.mat-column-quantity').contains(cant).should('be.visible');
+
+    }
+    removeCircleButton() {
+        cy.contains('button', 'remove_circle').click();
+
+    }
+    verifySuccessRemoved() {
+        cy.contains('One item removed from car').should('be.visible');
+
+    }
+    nose() {
+
+    }
+    nose() {
+
+    }
+
+
+
 
 } module.exports = new pageCart();

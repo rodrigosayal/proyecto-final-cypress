@@ -9,7 +9,7 @@ describe('Casos de prueba de FRONT', () => {
 
   
 
- it.only('Comprar carrito exitosamente y visualizar orden de compra', () => {
+ it('Comprar carrito exitosamente y visualizar orden de compra', () => {
 
     cy.deleteCartAPI(user.userId);
 
@@ -60,7 +60,32 @@ describe('Casos de prueba de FRONT', () => {
     pageHome.isBookVisible();
   })
 
-  it('Titulo caso de prueba 3 | Nombre Alumno', () => {
+  it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
+    cy.deleteCartAPI(user.userId);
+
+    cy.visit(url.login);
+    cy.login(user.name, user.password);
+
+    pageHome.isBookVisible();
+    componentNav.validationNumberCartBadge('0');
+    pageHome.clickAddToCartButton();
+
+    pageHome.verifySuccessAddToCartMessage(); 
+    componentNav.validationNumberCartBadge('1');
+
+    componentNav.goToShoppingCart();
+
+    pageCart.verifyBookInCart('Harry Potter and the Chamber of Secrets');
+
+    cy.increaseItemQuantity();
+    //pageCart.addCircleButton();
+    //pageCart.verifySuccessAdd();
+    //pageCart.matColumnQualityVisible(2);
+
+    pageCart.removeCircleButton();
+    pageCart.verifySuccessRemoved();
+    pageCart.matColumnQualityVisible(1);
+
   })
 
   it('Titulo caso de prueba 4 | Nombre Alumno', () => {

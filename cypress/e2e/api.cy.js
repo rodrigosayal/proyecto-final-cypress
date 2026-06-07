@@ -21,10 +21,12 @@ describe('Casos de prueba de APIs', () => {
         cy.postLoginAPI(user.name, 'PAssword123', 401);
     })
 
-    it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {
-    })
+    it.only('Borrar libros de la wishlist con token| Franco Nicolas Meza', () => {
+        cy.allDeleteWishlistAPI(user.userId, user.name, user.password, 200)
+        })
 
-    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
+    it.only('Borrar items de la wishlist sin token | Franco Nicolas Meza', () => {
+        cy.deleteWishlistUnauthorizedAPI(user.userId, 401)
     })
 
     it.skip('Titulo caso de prueba API 2 | Nombre Alumno', () => {

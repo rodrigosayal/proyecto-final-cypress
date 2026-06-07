@@ -8,7 +8,11 @@ Cypress.Commands.add('login', (name, password) => {
     pageLogin.typeUserPassword(password);
     pageLogin.clickLoginButton();
 })
-
+Cypress.Commands.add('increaseItemQuantity', () => {
+    pageCart.addCircleButton();
+    pageCart.verifySuccessAdd();
+    pageCart.matColumnQualityVisible(2);
+})
 
 Cypress.Commands.add('fillShippingForm', (name, address1, address2, pincode, state) => {
     pageCart.fillShippingName(name)
@@ -106,7 +110,7 @@ Cypress.Commands.add('deleteWishlistAPI', (userId, username, password) => {
             expect(deleteResponse.status).to.be.oneOf([200, 204, 404]);
         });
     });
-});
+}); 
 
 Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
     cy.request({
@@ -145,4 +149,33 @@ Cypress.Commands.add('deleteBookFromWishlistAndCheckVisible', (amount) => {
     pageWishlist.clickClearWishlistButton();
     pageWishlist.verifyEmptyWishlistMessage();
     componentNav.validationNumberWishlistBadge(amount);
+})
+Cypress.Commands.add('allDeleteWishlistAPI', (userId, username, password, codeResponse) => { 
+    cy.loginAPI(username, password).then((token) => {
+        cy.request({
+            method: 'DELETE',
+            url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+        expect(response.status).to.eq(codeResponse)
+        })
+    })
+})
+
+Cypress.Commands.add('deleteWishlistUnauthorizedAPI', (userId, codeResponse) => {
+        cy.request({
+            method: 'DELETE',
+            url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+            authorization: ''
+            } 
+        }).then((response) => {
+        expect(response.status).to.eq(codeResponse)
+    })
 })
