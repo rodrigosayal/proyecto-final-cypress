@@ -52,9 +52,9 @@ Cada integrante del grupo tiene la responsabilidad de documentar y automatizar *
 * **Caso 10:** `[Título del Caso FE]` | **César Taddey**
 * **Caso 11:** API | `[Título del Caso API Exitoso]` | **César Taddey**
 * **Caso 12:** API | `[Título del Caso API Error]` | **César Taddey**
-* **Caso 13:** `[Título del Caso FE]` | **Franco Meza**
-* **Caso 14:** API | `[Título del Caso API Exitoso]` | **Franco Meza**
-* **Caso 15:** API | `[Título del Caso API Error]` | **Franco Meza**
+* **Caso 13:** `FRONT | Prueba de botones + y - en el carrito` | **Franco Meza**
+* **Caso 14:** API | `API | Borrar libros de la wishlist con token API` | **Franco Meza**
+* **Caso 15:** API | `API | Borrar items de la wishlist sin token API` | **Franco Meza**
 
 ---
 
