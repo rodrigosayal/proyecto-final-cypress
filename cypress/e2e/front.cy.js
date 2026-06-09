@@ -5,6 +5,7 @@ const componentNav = require('../support/page_objects/componentNav')
 const pageCart = require('../support/page_objects/pageCart')
 const pageWishlist = require('../support/page_objects/pageWishlist')
 const pageCategory = require('../support/page_objects/pageCategory')
+const pageLogin = require('../support/page_objects/pageLogin')
 
 describe('Casos de prueba de FRONT', () => {
 
@@ -99,8 +100,11 @@ describe('Casos de prueba de FRONT', () => {
 
   })
 
-  it('Titulo caso de prueba 5 | Nombre Alumno', () => {
-  })
+  it('FRONT | Validar inicio de sesión fallido con contraseña incorrecta | César Taddey', () => {
+    cy.visit(url.login);
+    cy.login(user.name, 'WrongPass999');
+    pageLogin.verifyLoginErrorMessage();
+})
 
   //it.only ejecutar solo ese caso de prueba
   //it.skip no ejecuta ese caso de prueba

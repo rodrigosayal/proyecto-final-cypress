@@ -12,6 +12,9 @@ class pageLogin {
         cy.get('app-login button').contains('Login').click()
     }
 
-
-
+    verifyLoginErrorMessage() {
+        cy.url().should('include', '/login');
+        cy.get('app-login').should('be.visible');
+    }
+    
 } module.exports = new pageLogin();

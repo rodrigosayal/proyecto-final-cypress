@@ -38,8 +38,12 @@ describe('Casos de prueba de APIs', () => {
     })
 
     
-    it.skip('Titulo caso de prueba API 3 | Nombre Alumno', () => {
+    it('API | Agregar libro a la wishlist exitosamente API 7 | Cesar Taddey', () => {
+    cy.toggleWishlistWithTokenAPI(user.userId, user.name, user.password, 3, 200);
     })
 
+    it('API | Error al agregar libro a la wishlist sin token API 8 | Cesar Taddey', () => {
+    cy.toggleWishlistWithoutTokenAPI(user.userId, 3, 401);
+    })
 
 })

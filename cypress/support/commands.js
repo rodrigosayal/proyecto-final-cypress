@@ -210,4 +210,34 @@ Cypress.Commands.add('deleteWishlistUnauthorizedAPI', (userId, codeResponse) => 
         }).then((response) => {
         expect(response.status).to.eq(codeResponse)
     })
+
+Cypress.Commands.add('toggleWishlistWithTokenAPI', (userId, username, password, bookId, codeResponse) => {
+    cy.loginAPI(username, password).then((token) => {
+        cy.request({
+            method: 'POST',
+            url: `https://app.bookdbqa.online/api/Wishlist/ToggleWishlist/${userId}/${bookId}`,
+            failOnStatusCode: false,
+            headers: {
+                accept: 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(codeResponse);
+        });
+    });
+});
+
+Cypress.Commands.add('toggleWishlistWithoutTokenAPI', (userId, bookId, codeResponse) => {
+    cy.request({
+        method: 'POST',
+        url: `https://app.bookdbqa.online/api/Wishlist/ToggleWishlist/${userId}/${bookId}`,
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
+            authorization: ''
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse);
+    });
+});
 })
