@@ -9,10 +9,9 @@ class componentNav {
     }
 
     goToWishlist() {
-        cy.get('app-nav-bar').within(() => {
-            cy.get('mat-icon').contains('favorite').click();
-        });
-    }
+    const iconoFavoritosEnNav = 'app-nav-bar mat-icon';
+    cy.get(iconoFavoritosEnNav).contains('favorite').click();
+}
 
     goToShoppingCart() {
         cy.get('mat-icon').contains('shopping_cart').click();
