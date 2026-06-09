@@ -10,7 +10,7 @@ class componentNav {
 
     goToWishlist() {
         cy.get('app-nav-bar').within(() => {
-            cy.get('mat-icon').contains('favorite').click({ force: true });
+            cy.get('mat-icon').contains('favorite').click();
         });
     }
 
