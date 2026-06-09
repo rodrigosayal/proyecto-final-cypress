@@ -8,9 +8,9 @@ const pageCategory = require('../support/page_objects/pageCategory')
 
 describe('Casos de prueba de FRONT', () => {
 
-  
 
- it('Comprar carrito exitosamente y visualizar orden de compra', () => {
+
+  it('Comprar carrito exitosamente y visualizar orden de compra', () => {
 
     cy.deleteCartAPI(user.userId);
 
@@ -22,17 +22,17 @@ describe('Casos de prueba de FRONT', () => {
     componentNav.validationNumberCartBadge('0');
     pageHome.clickAddToCartButton();
 
-    pageHome.verifySuccessAddToCartMessage(); 
+    pageHome.verifySuccessAddToCartMessage();
     componentNav.validationNumberCartBadge('1');
 
     componentNav.goToShoppingCart();
 
     pageCart.verifyBookInCart('Harry Potter and the Chamber of Secrets');
-    
-    pageCart.clickCheckoutButton(); 
+
+    pageCart.clickCheckoutButton();
 
     pageCart.verifyOrderSummary('Harry Potter and the Chamber of Secrets');
-    
+
     cy.fillShippingForm(user.name, user.address1, user.address2, user.pincode, user.state);
 
     pageCart.clickPlaceOrderButton();
@@ -61,7 +61,7 @@ describe('Casos de prueba de FRONT', () => {
     pageHome.isBookVisible();
   })
 
-   it('Filtrar libros por categoría Drama | Rodrigo Sayal', () => {
+  it('Filtrar libros por categoría Drama | Rodrigo Sayal', () => {
     cy.visit(url.login)
     cy.login(user.name, user.password)
     cy.url().should('include', url.home)
@@ -69,9 +69,9 @@ describe('Casos de prueba de FRONT', () => {
     pageCategory.clickCategory('Drama');
 
     pageCategory.verifyBooksVisible();
-})
+  })
 
-it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
+  it('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
     cy.deleteCartAPI(user.userId);
 
     cy.visit(url.login);
@@ -81,7 +81,7 @@ it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
     componentNav.validationNumberCartBadge('0');
     pageHome.clickAddToCartButton();
 
-    pageHome.verifySuccessAddToCartMessage(); 
+    pageHome.verifySuccessAddToCartMessage();
     componentNav.validationNumberCartBadge('1');
 
     componentNav.goToShoppingCart();
@@ -104,5 +104,5 @@ it.only('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
 
   //it.only ejecutar solo ese caso de prueba
   //it.skip no ejecuta ese caso de prueba
-  
+
 })

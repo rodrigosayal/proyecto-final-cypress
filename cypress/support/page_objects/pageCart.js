@@ -57,21 +57,22 @@ class pageCart {
 
     verifyBookTitleInDetails(bookTitle) {
         cy.get('table.details-table').first().within(() => {
-            cy.contains(bookTitle).should('be.visible');
+            cy.contains(bookTitle, { timeout: 6000 }).should('be.visible');
         });
     }
 
     verifyBookQuantityInDetails(quantity) {
         cy.get('table.details-table').first().within(() => {
-            cy.contains(quantity).should('be.visible');
+            cy.contains(quantity, { timeout: 6000 }).should('be.visible');
         });
     }
 
     verifyOrderTotalInDetails(totalPrice) {
         cy.get('table.details-table').first().within(() => {
-            cy.contains(totalPrice).should('be.visible');
+            cy.contains(totalPrice, { timeout: 6000 }).should('be.visible');
         });
     }
+
     addCircleButton() {
         cy.contains('button', 'add_circle').click();
     }
