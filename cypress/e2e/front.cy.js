@@ -71,7 +71,7 @@ describe('Casos de prueba de FRONT', () => {
     pageCategory.verifyBooksVisible();
   })
 
-it('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
+  it('Prueba de botones + y - en el carrito  | Franco Nicolas Meza', () => {
     cy.deleteCartAPI(user.userId);
 
     cy.visit(url.login);
