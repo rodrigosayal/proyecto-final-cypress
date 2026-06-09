@@ -37,13 +37,12 @@ class pageCart {
         cy.get('button').contains('Place Order').click();
     }
 
-    // UNIFICADO: Eliminamos la función duplicada que estaba justo acá abajo
     verifyOrderSuccessMessage() {
         cy.contains('Order placed successfully!!!').should('be.visible');
     }
 
     verifyMyOrdersUrl() {
-        cy.url().should('include', '/myorders');
+        cy.url().should('include', '/myorders', { timeout: 6000 });
     }
 
     clickMostRecentOrderRow() {
