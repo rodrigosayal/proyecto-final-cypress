@@ -90,9 +90,6 @@ describe('Casos de prueba de FRONT', () => {
     pageCart.verifyBookInCart('Harry Potter and the Chamber of Secrets');
 
     cy.increaseItemQuantity();
-    //pageCart.addCircleButton();
-    //pageCart.verifySuccessAdd();
-    //pageCart.matColumnQualityVisible(2);
 
     pageCart.removeCircleButton();
     pageCart.verifySuccessRemoved();
@@ -105,8 +102,5 @@ describe('Casos de prueba de FRONT', () => {
     cy.login(user.name, 'WrongPass999');
     pageLogin.verifyLoginErrorMessage();
 })
-
-  //it.only ejecutar solo ese caso de prueba
-  //it.skip no ejecuta ese caso de prueba
 
 })
