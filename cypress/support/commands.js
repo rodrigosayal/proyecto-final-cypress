@@ -70,17 +70,18 @@ Cypress.Commands.add('postCheckOutAPI', (userId, token, codeResponse) => {
             "orderDetails": [
                 {
                     "book": {
-                        "bookId": 3,
-                        "title": "Harry Potter and the Prisoner of Azkaban",
+                        // Cambiamos el 3 por el 2 para alinearlo con el Front
+                        "bookId": 2,
+                        "title": "Harry Potter and the Chamber of Secrets",
                         "author": "JKR",
                         "category": "Romance",
-                        "price": 213,
-                        "coverFileName": "c63ade52-3f90-41fa-980a-1136b6ad2128HP3.jpg"
+                        "price": 236,
+                        "coverFileName": "9c3132bf-90d5-45ab-8ab1-24896e00199aHP2.jpg"
                     },
                     "quantity": 1
                 }
             ],
-            "cartTotal": 213
+            "cartTotal": 236
         }
     }).then((response) => {
         expect(response.status).to.eq(codeResponse);
@@ -132,9 +133,23 @@ Cypress.Commands.add('postLoginAPI', (username, password, codeResponse) => {
 });
 
 Cypress.Commands.add('verifyOrderHistoryDetails', (bookTitle, quantity, totalPrice) => {
+    // 1. Validamos que la URL sea la correcta (/myorders)
     pageCart.verifyMyOrdersUrl();
+    
+    // 2. Esperamos explícitamente a que aparezca al menos una fila en el listado de órdenes.
+    // Esto le da margen a la aplicación para renderizar la tabla inicial tras el cambio de página.
+    cy.get('tr.mat-mdc-row', { timeout: 10000 }).should('be.visible');
+    
+    // 3. Hacemos clic en la orden más reciente para expandir el detalle
     pageCart.clickMostRecentOrderRow();
+    
+    // 4. Verificamos que los contenedores del detalle se muestren estructuralmente
     pageCart.verifyOrderDetailContainersVisible();
+    
+    // 5. Ejecutamos las aserciones del contenido interno.
+    // Al haber modificado los métodos en pageCart.js con selectores de una sola línea 
+    // y timeouts de 10 segundos, Cypress reintentará buscar la tabla completa y su celda 
+    // de forma dinámica hasta que los datos impacten en la pantalla.
     pageCart.verifyBookTitleInDetails(bookTitle);
     pageCart.verifyBookQuantityInDetails(quantity);
     pageCart.verifyOrderTotalInDetails(totalPrice);
@@ -199,17 +214,18 @@ Cypress.Commands.add('allDeleteWishlistAPI', (userId, username, password, codeRe
 })
 
 Cypress.Commands.add('deleteWishlistUnauthorizedAPI', (userId, codeResponse) => {
-        cy.request({
-            method: 'DELETE',
-            url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
-            failOnStatusCode: false,
-            headers: {
-                accept: 'application/json',
+    cy.request({
+        method: 'DELETE',
+        url: `https://app.bookdbqa.online/api/Wishlist/${userId}`,
+        failOnStatusCode: false,
+        headers: {
+            accept: 'application/json',
             authorization: ''
-            } 
-        }).then((response) => {
-        expect(response.status).to.eq(codeResponse)
-    })
+        } 
+    }).then((response) => {
+        expect(response.status).to.eq(codeResponse);
+    });
+}); // <-- CORRECCIÓN: Cerramos correctamente este comando aquí
 
 Cypress.Commands.add('toggleWishlistWithTokenAPI', (userId, username, password, bookId, codeResponse) => {
     cy.loginAPI(username, password).then((token) => {
@@ -240,4 +256,3 @@ Cypress.Commands.add('toggleWishlistWithoutTokenAPI', (userId, bookId, codeRespo
         expect(response.status).to.eq(codeResponse);
     });
 });
-})

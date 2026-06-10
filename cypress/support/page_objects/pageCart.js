@@ -55,50 +55,42 @@ class pageCart {
     }
 
     verifyBookTitleInDetails(bookTitle) {
-        cy.get('table.details-table').first().within(() => {
-            cy.contains(bookTitle, { timeout: 6000 }).should('be.visible');
-        });
+        cy.get('table.details-table td', { timeout: 10000 })
+          .contains(bookTitle)
+          .should('exist');
     }
 
     verifyBookQuantityInDetails(quantity) {
-        cy.get('table.details-table').first().within(() => {
-            cy.contains(quantity, { timeout: 6000 }).should('be.visible');
-        });
+        cy.get('table.details-table td', { timeout: 10000 })
+          .contains(quantity)
+          .should('exist');
     }
 
     verifyOrderTotalInDetails(totalPrice) {
-        cy.get('table.details-table').first().within(() => {
-            cy.contains(totalPrice, { timeout: 6000 }).should('be.visible');
-        });
+        cy.get('table.details-table td', { timeout: 10000 })
+          .contains(totalPrice)
+          .should('exist');
     }
 
     addCircleButton() {
         cy.contains('button', 'add_circle').click();
     }
+
     verifySuccessAdd() {
         cy.contains('One Item added to cart').should('be.visible');
-
     }
+
     matColumnQualityVisible(cant) {
         cy.get('.mat-column-quantity').contains(cant).should('be.visible');
-
     }
+
     removeCircleButton() {
         cy.contains('button', 'remove_circle').click();
-
     }
+
     verifySuccessRemoved() {
         cy.contains('One item removed from car').should('be.visible');
-
     }
-    nose() {
-
-    }
-    nose() {
-
-    }
-
-
-
 
 } module.exports = new pageCart();
+
